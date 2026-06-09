@@ -1,0 +1,39 @@
+{
+  "lastChangelogVersion": "0.78.1",
+  "enabledModels": [
+    "opencode-go/glm-5",
+    "opencode-go/kimi-k2.5",
+    "opencode-go/kimi-k2.6",
+    "opencode-go/mimo-v2-omni",
+    "opencode-go/mimo-v2-pro",
+    "opencode-go/minimax-m2.5",
+    "opencode-go/minimax-m2.7",
+    "opencode-go/qwen3.5-plus",
+    "opencode-go/qwen3.6-plus",
+    "opencode-go/glm-5.1",
+    "anthropic/claude-opus-4-7",
+    "anthropic/claude-sonnet-4-6",
+    "openai-codex/gpt-5.5",
+    "openai-codex/gpt-5.3-codex"
+  ],
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5",
+  "packages": [
+    "../../../../workspace/pi-missions",
+    "npm:pi-web-access",
+    "npm:pi-subagents",
+    "npm:pi-mcp-adapter",
+    "npm:@aliou/pi-processes",
+    "npm:pi-powerline-footer",
+    "npm:@capyup/pi-goal",
+    "npm:context-mode"
+  ],
+  "defaultThinkingLevel": "low",
+  "terminal": {
+    "showTerminalProgress": false
+  },
+  "images": {
+    "blockImages": true
+  },
+  "doubleEscapeAction": "tree"
+}

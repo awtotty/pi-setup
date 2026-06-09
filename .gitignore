@@ -1,0 +1,14 @@
+# Do not commit secrets/session state
+auth.json
+**/auth.json
+sessions/
+**/sessions/
+run-history.jsonl
+context-mode/
+missions/
+*.db
+*.db-wal
+*.db-shm
+node_modules/
+package-lock.json
+*.bak-*
