@@ -30,6 +30,7 @@ copy_dir() {
       --exclude='*.db-wal' \
       --exclude='*.db-shm' \
       --exclude='*.bak-*' \
+      --exclude='find-skills' \
       -cf - .) | (cd "$dst" && tar -xf -)
     echo "synced $src -> $dst"
   else
