@@ -28,8 +28,12 @@ if [[ -f "$ROOT/pi-agent/package-lock.json" ]]; then
 fi
 rm -rf "$PI_AGENT_DIR/skills" "$PI_AGENT_DIR/extensions"
 mkdir -p "$PI_AGENT_DIR/skills" "$PI_AGENT_DIR/extensions"
-(cd "$ROOT/pi-agent/skills" && tar -cf - .) | (cd "$PI_AGENT_DIR/skills" && tar -xf -)
-(cd "$ROOT/pi-agent/extensions" && tar -cf - .) | (cd "$PI_AGENT_DIR/extensions" && tar -xf -)
+if [[ -d "$ROOT/pi-agent/skills" ]]; then
+  (cd "$ROOT/pi-agent/skills" && tar -cf - .) | (cd "$PI_AGENT_DIR/skills" && tar -xf -)
+fi
+if [[ -d "$ROOT/pi-agent/extensions" ]]; then
+  (cd "$ROOT/pi-agent/extensions" && tar -cf - .) | (cd "$PI_AGENT_DIR/extensions" && tar -xf -)
+fi
 
 if command -v npm >/dev/null 2>&1; then
   (cd "$PI_AGENT_DIR/npm" && npm install)
