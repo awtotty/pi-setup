@@ -3,7 +3,6 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PI_AGENT_DIR="${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}"
-BILI_CONFIG_PATH="${BILI_CONFIG_FILE:-$HOME/.config/billion-context/billion-context.json}"
 
 mkdir -p "$ROOT/pi-agent/skills" "$ROOT/pi-agent/extensions"
 
@@ -44,13 +43,6 @@ copy_file "$PI_AGENT_DIR/npm/package.json" "$ROOT/pi-agent/package.json"
 copy_file "$PI_AGENT_DIR/npm/package-lock.json" "$ROOT/pi-agent/package-lock.json"
 copy_dir "$PI_AGENT_DIR/skills" "$ROOT/pi-agent/skills"
 copy_dir "$PI_AGENT_DIR/extensions" "$ROOT/pi-agent/extensions"
-
-if [[ -f "$BILI_CONFIG_PATH" ]]; then
-  node "$ROOT/scripts/billion-context-config.mjs" export \
-    "$BILI_CONFIG_PATH" "$ROOT/billion-context/billion-context.json"
-else
-  echo "missing $BILI_CONFIG_PATH; keeping portable billion-context config unchanged" >&2
-fi
 
 cat <<EOF
 

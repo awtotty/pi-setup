@@ -13,7 +13,6 @@
     "npm:pi-web-access",
     "npm:pi-subagents",
     "npm:pi-powerline-footer",
-    "npm:billion-context",
     "npm:pi-notify"
   ],
   "defaultThinkingLevel": "medium",

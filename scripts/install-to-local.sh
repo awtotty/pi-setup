@@ -3,7 +3,6 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PI_AGENT_DIR="${PI_CODING_AGENT_DIR:-$HOME/.pi/agent}"
-BILI_CONFIG_PATH="${BILI_CONFIG_FILE:-$HOME/.config/billion-context/billion-context.json}"
 ts="$(date +%Y%m%d-%H%M%S)"
 
 mkdir -p "$PI_AGENT_DIR" "$PI_AGENT_DIR/npm" "$PI_AGENT_DIR/skills" "$PI_AGENT_DIR/extensions"
@@ -34,15 +33,6 @@ if [[ -d "$ROOT/pi-agent/skills" ]]; then
 fi
 if [[ -d "$ROOT/pi-agent/extensions" ]]; then
   (cd "$ROOT/pi-agent/extensions" && tar -cf - .) | (cd "$PI_AGENT_DIR/extensions" && tar -xf -)
-fi
-
-if [[ -f "$ROOT/billion-context/billion-context.json" ]]; then
-  if [[ -f "$BILI_CONFIG_PATH" ]]; then
-    cp -p "$BILI_CONFIG_PATH" "$BILI_CONFIG_PATH.bak-$ts"
-    echo "backed up $BILI_CONFIG_PATH"
-  fi
-  node "$ROOT/scripts/billion-context-config.mjs" merge \
-    "$ROOT/billion-context/billion-context.json" "$BILI_CONFIG_PATH"
 fi
 
 if command -v npm >/dev/null 2>&1; then
