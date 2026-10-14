@@ -19,6 +19,7 @@ backup_path settings.json
 backup_path npm/package.json
 backup_path npm/package-lock.json
 backup_path skills
+backup_path prompts
 backup_path extensions
 
 cp "$ROOT/pi-agent/settings.json" "$PI_AGENT_DIR/settings.json"
@@ -26,10 +27,13 @@ cp "$ROOT/pi-agent/package.json" "$PI_AGENT_DIR/npm/package.json"
 if [[ -f "$ROOT/pi-agent/package-lock.json" ]]; then
   cp "$ROOT/pi-agent/package-lock.json" "$PI_AGENT_DIR/npm/package-lock.json"
 fi
-rm -rf "$PI_AGENT_DIR/skills" "$PI_AGENT_DIR/extensions"
-mkdir -p "$PI_AGENT_DIR/skills" "$PI_AGENT_DIR/extensions"
+rm -rf "$PI_AGENT_DIR/skills" "$PI_AGENT_DIR/prompts" "$PI_AGENT_DIR/extensions"
+mkdir -p "$PI_AGENT_DIR/skills" "$PI_AGENT_DIR/prompts" "$PI_AGENT_DIR/extensions"
 if [[ -d "$ROOT/pi-agent/skills" ]]; then
   (cd "$ROOT/pi-agent/skills" && tar -cf - .) | (cd "$PI_AGENT_DIR/skills" && tar -xf -)
+fi
+if [[ -d "$ROOT/pi-agent/prompts" ]]; then
+  (cd "$ROOT/pi-agent/prompts" && tar -cf - .) | (cd "$PI_AGENT_DIR/prompts" && tar -xf -)
 fi
 if [[ -d "$ROOT/pi-agent/extensions" ]]; then
   (cd "$ROOT/pi-agent/extensions" && tar -cf - .) | (cd "$PI_AGENT_DIR/extensions" && tar -xf -)

@@ -73,6 +73,47 @@ test('sync snapshots the profile and custom resources without credentials or dat
   assert.equal(existsSync(join(f.repo, 'pi-agent', 'auth.json')), false);
 });
 
+test('installer replaces skills and prompts, preserving stale resources only in backups', t => {
+  const f = fixture(t);
+  for (const resource of ['skills', 'prompts']) {
+    mkdirSync(join(f.agent, resource), { recursive: true });
+    writeFileSync(join(f.agent, resource, 'stale.md'), 'old resource');
+    mkdirSync(join(f.repo, 'pi-agent', resource), { recursive: true });
+    writeFileSync(join(f.repo, 'pi-agent', resource, 'current.md'), 'current resource');
+  }
+  f.run('install-to-local.sh');
+  for (const resource of ['skills', 'prompts']) {
+    assert.equal(existsSync(join(f.agent, resource, 'stale.md')), false);
+    assert.equal(readFileSync(join(f.agent, resource, 'current.md'), 'utf8'), 'current resource');
+    const backup = readdirSync(f.agent).find(name => name.startsWith(`${resource}.bak-`));
+    assert.ok(backup);
+    assert.equal(readFileSync(join(f.agent, backup, 'stale.md'), 'utf8'), 'old resource');
+  }
+});
+
+test('installer clears local prompts when the repo has no prompts directory', t => {
+  const f = fixture(t);
+  rmSync(join(f.repo, 'pi-agent', 'prompts'), { recursive: true, force: true });
+  mkdirSync(join(f.agent, 'prompts'), { recursive: true });
+  writeFileSync(join(f.agent, 'prompts', 'stale.md'), 'old prompt');
+  f.run('install-to-local.sh');
+  assert.deepEqual(readdirSync(join(f.agent, 'prompts')), []);
+});
+
+test('sync mirrors prompts and removes deleted templates', t => {
+  const f = fixture(t);
+  mkdirSync(join(f.agent, 'prompts'), { recursive: true });
+  writeFileSync(join(f.agent, 'prompts', 'current.md'), 'current prompt');
+  mkdirSync(join(f.repo, 'pi-agent', 'prompts'), { recursive: true });
+  writeFileSync(join(f.repo, 'pi-agent', 'prompts', 'stale.md'), 'old prompt');
+  f.run('sync-from-local.sh');
+  assert.deepEqual(readdirSync(join(f.repo, 'pi-agent', 'prompts')), ['current.md']);
+  assert.equal(readFileSync(join(f.repo, 'pi-agent', 'prompts', 'current.md'), 'utf8'), 'current prompt');
+  rmSync(join(f.agent, 'prompts'), { recursive: true });
+  f.run('sync-from-local.sh');
+  assert.deepEqual(readdirSync(join(f.repo, 'pi-agent', 'prompts')), []);
+});
+
 test('installer falls back to npm install when no lockfile is provided', t => {
   const f = fixture(t);
   rmSync(join(f.repo, 'pi-agent', 'package-lock.json'));
