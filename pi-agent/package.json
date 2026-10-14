@@ -2,12 +2,10 @@
   "name": "pi-extensions",
   "private": true,
   "dependencies": {
-    "@aliou/pi-processes": "^0.9.4",
-    "@capyup/pi-goal": "^0.6.0",
-    "context-mode": "^1.0.162",
-    "pi-mcp-adapter": "^2.9.0",
-    "pi-powerline-footer": "^0.6.0",
-    "pi-subagents": "^0.28.0",
-    "pi-web-access": "^0.10.7"
+    "billion-context": "^0.1.196",
+    "pi-notify": "^1.4.0",
+    "pi-powerline-footer": "^0.20.1",
+    "pi-subagents": "^0.78.0",
+    "pi-web-access": "^0.40.0"
   }
 }

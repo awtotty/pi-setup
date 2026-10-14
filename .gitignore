@@ -11,4 +11,5 @@ missions/
 *.db-shm
 node_modules/
 package-lock.json
+!pi-agent/package-lock.json
 *.bak-*
