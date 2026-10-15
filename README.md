@@ -10,6 +10,7 @@ The shared profile installs:
 - `pi-powerline-footer` — terminal status UI
 - `pi-web-access` — web search and content fetching
 - `pi-notify` — terminal/desktop completion notifications
+- `pi-usage-meters` — `/usage` subscription quota meters and reset times
 
 Built-in Pi MCP support stays enabled. The old pi-missions path and removed extension packages are no longer part of this profile.
 

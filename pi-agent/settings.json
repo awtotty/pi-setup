@@ -13,7 +13,8 @@
     "npm:pi-web-access",
     "npm:pi-subagents",
     "npm:pi-powerline-footer",
-    "npm:pi-notify"
+    "npm:pi-notify",
+    "npm:pi-usage-meters"
   ],
   "defaultThinkingLevel": "medium",
   "terminal": {

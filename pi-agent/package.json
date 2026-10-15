@@ -5,6 +5,7 @@
     "pi-notify": "^1.4.0",
     "pi-powerline-footer": "^0.20.1",
     "pi-subagents": "^0.78.0",
+    "pi-usage-meters": "^0.5.0",
     "pi-web-access": "^0.40.0"
   }
 }

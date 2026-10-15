@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { test } from 'node:test';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const expectedPackages = ['pi-notify', 'pi-powerline-footer', 'pi-subagents', 'pi-web-access'];
+const expectedPackages = ['pi-notify', 'pi-powerline-footer', 'pi-subagents', 'pi-usage-meters', 'pi-web-access'];
 const readJSON = path => JSON.parse(readFileSync(path, 'utf8'));
 const writeJSON = (path, value) => {
   mkdirSync(dirname(path), { recursive: true });
@@ -30,7 +30,7 @@ function fixture(t) {
   return { dir, repo, home, agent, env, run };
 }
 
-test('settings, manifest, and lockfile agree on the four extension packages', () => {
+test('settings, manifest, and lockfile agree on the five extension packages', () => {
   const settings = readJSON(join(root, 'pi-agent', 'settings.json'));
   const manifest = readJSON(join(root, 'pi-agent', 'package.json'));
   const lock = readJSON(join(root, 'pi-agent', 'package-lock.json'));
